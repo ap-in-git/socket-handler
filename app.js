@@ -16,6 +16,8 @@ const io = socket(http,{
 });
 
 io.use((socket, next) => {
+    console.log(socket.handshake.query.token)
+    console.log(process.env.CLIENT_SECRET)
     if (socket.handshake.query && socket.handshake.query.token === process.env.CLIENT_SECRET){
         next()
     }else{
