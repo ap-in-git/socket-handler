@@ -17,7 +17,6 @@ const io = socket(http,{
 
 io.use((socket, next) => {
     if (socket.handshake.query && socket.handshake.query.token === process.env.CLIENT_SECRET){
-        console.log(process.env.CLIENT_SECRET)
         next()
     }else{
         next(new Error("Invalid token"))
@@ -27,7 +26,6 @@ app.use(cors())
 app.use(express.json())
 
 app.post("/sock",(req, res) => {
-    console.log(process.env.CLIENT_SECRET)
     if(req.body.token !== process.env.CLIENT_SECRET){
         return  res.json({
             message:"Unauthorized"
