@@ -17,15 +17,11 @@ const io = socket(http,{
 
 io.use((socket, next) => {
     if (socket.handshake.query && socket.handshake.query.token === process.env.CLIENT_SECRET){
+        console.log(process.env.CLIENT_SECRET)
         next()
     }else{
         next(new Error("Invalid token"))
     }
-    // if (isValid(socket.request)) {
-        next();
-    // } else {
-    //     next(new Error("invalid"));
-    // }
 });
 app.use(cors())
 app.use(express.json())
