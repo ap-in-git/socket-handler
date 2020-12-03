@@ -31,6 +31,12 @@ app.use(cors())
 app.use(express.json())
 
 app.post("/sock",(req, res) => {
+    if(req.body.token !== process.env.CLIENT_SECRET){
+        return  res.json({
+            message:"Unauthorized"
+        },401)
+    }
+
     io.emit(req.body.channel,req.body.body)
     return res.json({
         message:"success"
